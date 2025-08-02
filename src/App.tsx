@@ -1,10 +1,14 @@
 import "./App.css";
+import data from "../data.json";
+import CommentCard from "./components/CommentCard";
 
 function App() {
   return (
-    <body>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </body>
+    <div className="flex flex-col">
+      {data.comments.map((comment) => (
+        <CommentCard comment={comment} />
+      ))}
+    </div>
   );
 }
 
