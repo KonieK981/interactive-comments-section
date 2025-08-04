@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-:root {
-}
-
 @theme {
   --font-display: "Rubik", "sans-serif";
 
@@ -22,4 +19,22 @@
 body {
   font-family: var(--font-display);
   background-color: var(--color-grey-50);
+}
+
+.fixed-size-img {
+  max-width: none;
+  height: auto;
+}
+
+#score-panel button:hover path {
+  fill: var(--color-purple-600);
+}
+
+.ghost-btn:hover {
+  span {
+    color: var(--color-purple-200);
+  }
+  path {
+    fill: var(--color-purple-200);
+  }
 }

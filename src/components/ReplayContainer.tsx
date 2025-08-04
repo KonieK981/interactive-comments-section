@@ -1,7 +1,7 @@
 import React from "react";
 
-const ReplayContainer = () => {
-  return <div>ReplayContainer</div>;
+const ReplyContainer = () => {
+  return <div>ReplyContainer</div>;
 };
 
-export default ReplayContainer;
+export default ReplyContainer;

@@ -4,16 +4,17 @@ import Form from "./components/Form";
 import Modal from "./components/Modal";
 import { useState } from "react";
 import Button from "./components/buttons/Button";
+import React from "react";
 
 function App() {
   const comments = data.comments;
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-0.5 px-3 py-6">
         {comments.map((comment) => (
-          <>
+          <React.Fragment key={comment.id}>
             <CommentCard
               content={comment.content}
               createdAt={comment.createdAt}
@@ -23,9 +24,10 @@ function App() {
             />
 
             {comment.replies && (
-              <div className="flex flex-col gap-4 border-l-2 border-grey-100 pl-4">
+              <div className="flex flex-col gap-3 pt-3 border-l-2 border-grey-100 pl-3">
                 {comment.replies.map((reply) => (
                   <CommentCard
+                    key={reply.id}
                     content={reply.content}
                     createdAt={reply.createdAt}
                     score={reply.score}
@@ -36,10 +38,11 @@ function App() {
                 ))}
               </div>
             )}
-          </>
+          </React.Fragment>
         ))}
-
-        <Form />
+        <div className="mt-3">
+          <Form />
+        </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2 className="text-md font-medium text-grey-800 text-left">

@@ -9,11 +9,11 @@ const Button = ({
 }) => {
   return (
     <button
-      className={`inline-flex items-center gap-1 ${classProps}`}
+      className={`inline-flex items-center gap-1 cursor-pointer ${classProps}`}
       aria-label={alt}
       onClick={handleClick}
     >
-      {imgUrl && <img src={imgUrl} alt={alt} />}
+      {imgUrl && imgUrl}
       <span className={`${spanProps} font-medium text-${color}`}>{text}</span>
     </button>
   );
