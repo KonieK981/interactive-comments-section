@@ -1,42 +1,73 @@
-import "./App.css";
 import data from "../data.json";
 import CommentCard from "./components/CommentCard";
 import Form from "./components/Form";
+import Modal from "./components/Modal";
+import { useState } from "react";
+import Button from "./components/buttons/Button";
 
 function App() {
   const comments = data.comments;
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   return (
-    <div className="flex flex-col gap-4">
-      {comments.map((comment) => (
-        <>
-          <CommentCard
-            content={comment.content}
-            createdAt={comment.createdAt}
-            score={comment.score}
-            username={comment.user.username}
-            userImg={comment.user.image.webp}
+    <>
+      <div className="flex flex-col gap-4 p-4">
+        {comments.map((comment) => (
+          <>
+            <CommentCard
+              content={comment.content}
+              createdAt={comment.createdAt}
+              score={comment.score}
+              username={comment.user.username}
+              userImg={comment.user.image.webp}
+            />
+
+            {comment.replies && (
+              <div className="flex flex-col gap-4 border-l-2 border-grey-100 pl-4">
+                {comment.replies.map((reply) => (
+                  <CommentCard
+                    content={reply.content}
+                    createdAt={reply.createdAt}
+                    score={reply.score}
+                    username={reply.user.username}
+                    userImg={reply.user.image.webp}
+                    replyingTo={reply.replyingTo}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ))}
+
+        <Form />
+      </div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className="text-md font-medium text-grey-800 text-left">
+          Delete comment
+        </h2>
+        <p className="mt-2 text-left text-grey-500 text-sm">
+          Are you sure you want to delete this comment? This will remove the
+          comment and cant't be undone.
+        </p>
+
+        <div className="w-full mt-4 inline-flex justify-between">
+          <Button
+            text="NO, CANCEL"
+            alt="Cancel button"
+            classProps="px-4 py-2 text-white bg-grey-500 rounded-md"
+            spanProps="text-sm"
+            handleClick={() => setIsModalOpen(false)}
           />
-
-          {comment.replies && (
-            <div className="flex flex-col gap-4 border-l-2 border-grey-100 pl-4">
-              {comment.replies.map((reply) => (
-                <CommentCard
-                  content={reply.content}
-                  createdAt={reply.createdAt}
-                  score={reply.score}
-                  username={reply.user.username}
-                  userImg={reply.user.image.webp}
-                  replyingTo={reply.replyingTo}
-                />
-              ))}
-            </div>
-          )}
-        </>
-      ))}
-
-      <Form />
-    </div>
+          <Button
+            text="YES, DELETE"
+            alt="Delete button"
+            classProps="px-4 py-2 text-white bg-pink-400 rounded-md"
+            spanProps="text-sm"
+            handleClick={() => setIsModalOpen(false)}
+          />
+        </div>
+      </Modal>
+    </>
   );
 }
 
