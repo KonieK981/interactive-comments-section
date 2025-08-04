@@ -1,4 +1,4 @@
-import ReplayButton from "./ReplayButton";
+import Button from "./buttons/Button";
 import ScoreCounter from "./ScoreCounter";
 
 const CommentCard = ({
@@ -8,6 +8,7 @@ const CommentCard = ({
   username,
   userImg,
   replyingTo,
+  editable = false,
 }) => {
   return (
     <article className="w-full flex flex-col gap-4 rounded-xl bg-white p-4">
@@ -21,14 +22,36 @@ const CommentCard = ({
 
       <p className="text-gray-500 text-xl text-left">
         {replyingTo && (
-          <span className="text-purple-600 font-medium">{replyingTo}</span>
+          <span className="text-purple-600 font-medium">@{replyingTo} </span>
         )}
         {content}
       </p>
 
       <footer className="flex justify-between">
         <ScoreCounter score={score} />
-        <ReplayButton />
+        {editable ? (
+          <div className="inline-flex gap-4">
+            <Button
+              imgUrl="./images/icon-delete.svg"
+              color="pink-400"
+              text="Delete"
+              alt="Delete button"
+            />
+            <Button
+              imgUrl="./images/icon-edit.svg"
+              color="purple-600"
+              text="Edit"
+              alt="Edit button"
+            />
+          </div>
+        ) : (
+          <Button
+            imgUrl="./images/icon-reply.svg"
+            color="purple-600"
+            text="Replay"
+            alt="Replay button"
+          />
+        )}
       </footer>
     </article>
   );
