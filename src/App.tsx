@@ -1,6 +1,7 @@
 import "./App.css";
 import data from "../data.json";
 import CommentCard from "./components/CommentCard";
+import Form from "./components/Form";
 
 function App() {
   const comments = data.comments;
@@ -33,6 +34,8 @@ function App() {
           )}
         </>
       ))}
+
+      <Form />
     </div>
   );
 }
