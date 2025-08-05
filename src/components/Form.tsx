@@ -9,15 +9,6 @@ const Form = () => {
     />
   );
 
-  const btn = (
-    <Button
-      text="SEND"
-      alt="Send button"
-      classProps="px-6 py-2 text-white bg-purple-600 rounded-md hover:bg-purple-200"
-      spanProps="text-md"
-    />
-  );
-
   return (
     <div className="w-full rounded-xl bg-white p-4 md:flex ">
       <div className="hidden md:block">{img}</div>
@@ -31,7 +22,13 @@ const Form = () => {
         ></textarea>
         <footer className="mt-2 inline-flex justify-between md:block">
           <div className="md:hidden">{img}</div>
-          {btn}
+          <Button
+            text="SEND"
+            alt="Send button"
+            classProps="px-6 py-2 text-white bg-purple-600 rounded-md hover:bg-purple-200"
+            spanProps="text-md"
+            type="submit"
+          />
         </footer>
       </form>
     </div>

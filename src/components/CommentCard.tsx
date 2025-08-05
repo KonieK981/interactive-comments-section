@@ -15,10 +15,15 @@ const CommentCard = ({
   owner,
 }) => {
   const [isReplying, setIsReplying] = useState(false);
-  const { handleScore } = useComments();
+  const { handleScore, setIsModalOpen, setDeleteModalData } = useComments();
 
   const handleScoreAction = (action) => {
     handleScore(id, action);
+  };
+
+  const handleDelete = () => {
+    setIsModalOpen(true);
+    setDeleteModalData(id);
   };
 
   const actions = owner ? (
@@ -36,6 +41,7 @@ const CommentCard = ({
         text="Delete"
         alt="Delete button"
         classProps="delete-btn"
+        handleClick={handleDelete}
       />
       <Button
         imgUrl={
@@ -50,6 +56,7 @@ const CommentCard = ({
         text="Edit"
         alt="Edit button"
         classProps="edit-btn"
+        // handleClick={}
       />
     </div>
   ) : (

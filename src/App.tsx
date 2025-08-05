@@ -5,7 +5,14 @@ import Button from "./components/buttons/Button";
 import React from "react";
 import { useComments } from "./contexts/CommentsContext";
 function App() {
-  const { comments, currentUser, isModalOpen } = useComments();
+  const {
+    comments,
+    currentUser,
+    isModalOpen,
+    setIsModalOpen,
+    removeComments,
+    setDeleteModalData,
+  } = useComments();
 
   return (
     <>
@@ -45,7 +52,13 @@ function App() {
           <Form />
         </div>
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setDeleteModalData(null);
+        }}
+      >
         <h2 className="text-md font-medium text-grey-800 text-left">
           Delete comment
         </h2>
@@ -53,21 +66,23 @@ function App() {
           Are you sure you want to delete this comment? This will remove the
           comment and cant't be undone.
         </p>
-
         <div className="w-full mt-4 inline-flex justify-between">
           <Button
             text="NO, CANCEL"
             alt="Cancel button"
-            classProps="cancel-btn px-4 py-2 text-white bg-grey-500 rounded-md"
+            classProps="px-4 py-2 text-white bg-grey-500 rounded-md hover:bg-grey-100"
             spanProps="text-sm"
-            handleClick={() => setIsModalOpen(false)}
+            handleClick={() => {
+              setIsModalOpen(false);
+              setDeleteModalData(null);
+            }}
           />
           <Button
             text="YES, DELETE"
             alt="Delete button"
-            classProps="delete-btn px-4 py-2 text-white bg-pink-400 rounded-md"
+            classProps=" px-4 py-2 text-white bg-pink-400 rounded-md hover:bg-pink-200"
             spanProps="text-sm"
-            handleClick={() => setIsModalOpen(false)}
+            handleClick={removeComments}
           />
         </div>
       </Modal>
