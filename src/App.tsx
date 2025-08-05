@@ -1,39 +1,40 @@
-import data from "../data.json";
 import CommentCard from "./components/CommentCard";
 import Form from "./components/Form";
 import Modal from "./components/Modal";
-import { useState } from "react";
 import Button from "./components/buttons/Button";
 import React from "react";
-
+import { useComments } from "./contexts/CommentsContext";
 function App() {
-  const comments = data.comments;
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { comments, currentUser, isModalOpen } = useComments();
 
   return (
     <>
-      <div className="flex flex-col gap-0.5 px-3 py-6">
+      <div className="flex flex-col gap-4 px-3 py-6">
         {comments.map((comment) => (
           <React.Fragment key={comment.id}>
             <CommentCard
+              id={comment.id}
               content={comment.content}
               createdAt={comment.createdAt}
               score={comment.score}
               username={comment.user.username}
               userImg={comment.user.image.webp}
+              owner={currentUser.username === comment.username}
             />
 
-            {comment.replies && (
-              <div className="flex flex-col gap-3 pt-3 border-l-2 border-grey-100 pl-3">
+            {comment.replies.length > 0 && (
+              <div className="flex flex-col gap-3 border-l-2 border-grey-100 pl-3">
                 {comment.replies.map((reply) => (
                   <CommentCard
                     key={reply.id}
+                    id={reply.id}
                     content={reply.content}
                     createdAt={reply.createdAt}
                     score={reply.score}
                     username={reply.user.username}
                     userImg={reply.user.image.webp}
                     replyingTo={reply.replyingTo}
+                    owner={currentUser.username === reply.user.username}
                   />
                 ))}
               </div>
@@ -57,14 +58,14 @@ function App() {
           <Button
             text="NO, CANCEL"
             alt="Cancel button"
-            classProps="px-4 py-2 text-white bg-grey-500 rounded-md"
+            classProps="cancel-btn px-4 py-2 text-white bg-grey-500 rounded-md"
             spanProps="text-sm"
             handleClick={() => setIsModalOpen(false)}
           />
           <Button
             text="YES, DELETE"
             alt="Delete button"
-            classProps="px-4 py-2 text-white bg-pink-400 rounded-md"
+            classProps="delete-btn px-4 py-2 text-white bg-pink-400 rounded-md"
             spanProps="text-sm"
             handleClick={() => setIsModalOpen(false)}
           />

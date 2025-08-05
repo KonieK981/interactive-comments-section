@@ -38,3 +38,26 @@ body {
     fill: var(--color-purple-200);
   }
 }
+
+.edit-btn:hover {
+  span {
+    color: var(--color-purple-200);
+  }
+  path {
+    fill: var(--color-purple-200);
+  }
+}
+
+.delete-btn {
+  span {
+    color: var(--color-pink-400);
+  }
+  &:hover {
+    span {
+      color: var(--color-pink-200);
+    }
+    path {
+      fill: var(--color-pink-200);
+    }
+  }
+}
