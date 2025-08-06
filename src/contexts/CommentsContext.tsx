@@ -1,13 +1,34 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import data from "../../data.json";
+
+const LOCAL_STORAGE_KEY = "commentsAppData";
 
 const CommentsContext = createContext(null);
 
 export function CommentsProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(data.currentUser);
-  const [comments, setComments] = useState(data.comments);
+  const getInitialData = () => {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {
+        return data;
+      }
+    }
+    return data;
+  };
+
+  const [currentUser, setCurrentUser] = useState(getInitialData().currentUser);
+  const [comments, setComments] = useState(getInitialData().comments);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteModalData, setDeleteModalData] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem(
+      LOCAL_STORAGE_KEY,
+      JSON.stringify({ currentUser, comments })
+    );
+  }, [currentUser, comments]);
 
   const handleScore = (id, action) => {
     const updateComments = comments.map((comment) => {
