@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useComments } from "../contexts/CommentsContext";
+import { useContext, useState, type ChangeEvent, type FormEvent } from "react";
 import Button from "./buttons/Button";
+import type { FormProps } from "../types";
+import { CommentsContext } from "../contexts/CommentsContext";
 
-const Form = ({ commentData, id, action }) => {
-  const { addComments, editComments, currentUser } = useComments();
+const Form = ({ commentData, id, action }: FormProps) => {
+  const { addComments, editComments, currentUser } =
+    useContext(CommentsContext);
   const [formData, setFormData] = useState({ commentText: "" });
 
   const type = commentData ? "edit" : "comment";
@@ -12,22 +14,22 @@ const Form = ({ commentData, id, action }) => {
     <img src={currentUser.image.webp} alt="User avatar" className="w-8 h-8" />
   );
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({ ...formData, commentText: e.target.value });
   };
 
-  const handleAddComments = (e) => {
+  const handleAddComments = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addComments(formData.commentText, id);
     setFormData({ commentText: "" });
     if (action) action(false);
   };
 
-  const handleEditComments = (e) => {
+  const handleEditComments = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     editComments(id, formData.commentText);
-    e.target.reset();
-    action(false);
+    (e.target as HTMLFormElement).reset();
+    if (action) action(false);
   };
 
   return (

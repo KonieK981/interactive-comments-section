@@ -1,3 +1,5 @@
+import type { ButtonProps } from "../../types";
+
 const Button = ({
   imgUrl,
   color,
@@ -8,7 +10,7 @@ const Button = ({
   classProps = "",
   handleClick,
   disabled,
-}) => {
+}: ButtonProps) => {
   return (
     <button
       type={type}

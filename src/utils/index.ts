@@ -1,7 +1,7 @@
-export function timeAgo(dateString) {
+export function timeAgo(date: string | number | Date): string {
   const now = new Date();
-  const past = new Date(dateString);
-  const diffInSeconds = Math.floor((now - past) / 1000);
+  const past = new Date(date);
+  const diffInSeconds = Math.floor((now.getTime() - past.getTime()) / 1000);
 
   const intervals = [
     { label: "year", seconds: 31536000 },

@@ -1,7 +1,10 @@
-const Modal = ({ isOpen, onClose, children }) => {
+import type React from "react";
+import type { ModalProps } from "../types";
+
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
-  const handleOverlayClick = (e) => {
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }

@@ -2,8 +2,10 @@ import CommentCard from "./components/CommentCard";
 import Form from "./components/Form";
 import Modal from "./components/Modal";
 import Button from "./components/buttons/Button";
-import React from "react";
-import { useComments } from "./contexts/CommentsContext";
+import React, { useContext } from "react";
+import type { Comment } from "./types";
+import { CommentsContext } from "./contexts/CommentsContext";
+
 function App() {
   const {
     comments,
@@ -11,12 +13,12 @@ function App() {
     setIsModalOpen,
     removeComments,
     setDeleteModalData,
-  } = useComments();
+  } = useContext(CommentsContext);
 
   return (
     <>
       <div className="flex flex-col gap-4 px-3 py-6 max-w-5xl mx-auto">
-        {comments.map((comment) => (
+        {comments?.map((comment: Comment) => (
           <React.Fragment key={comment.id}>
             <CommentCard
               id={comment.id}

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "./buttons/Button";
 import Form from "./Form";
 import ScoreCounter from "./ScoreCounter";
-import { useComments } from "../contexts/CommentsContext";
-import { timeAgo } from "../utils";
+import { timeAgo } from "../utils/index";
+import type { CommentCardProps } from "../types";
+import { CommentsContext } from "../contexts/CommentsContext";
 
 const CommentCard = ({
   id,
@@ -13,33 +14,30 @@ const CommentCard = ({
   username,
   userImg,
   replyingTo,
-}) => {
+}: CommentCardProps) => {
   const [isReplying, setIsReplying] = useState(false);
-  const [commentData, setCommentData] = useState(null);
+  const [commentData, setCommentData] = useState<
+    { content: string } | undefined
+  >(undefined);
+
   const { currentUser, handleScore, setIsModalOpen, setDeleteModalData } =
-    useComments();
+    useContext(CommentsContext);
 
   const owner = currentUser.username === username;
 
-  const handleScoreAction = (action) => {
-    handleScore(id, action);
+  const handleScoreAction = (action: "up" | "down") => {
+    handleScore(String(id), action);
   };
 
   const handleDelete = () => {
     setIsModalOpen(true);
-    setDeleteModalData(id);
+    setDeleteModalData(String(id));
   };
 
   const handleEdit = () => {
     setIsReplying(true);
     setCommentData({
-      id,
       content,
-      createdAt,
-      score,
-      username,
-      userImg,
-      replyingTo,
     });
   };
 

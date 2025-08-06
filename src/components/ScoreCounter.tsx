@@ -1,7 +1,8 @@
 import { useRef } from "react";
+import type { ScoreCounterProps } from "../types";
 
-const ScoreCounter = ({ score, handleClick }) => {
-  const vote = useRef(null);
+const ScoreCounter = ({ score, handleClick }: ScoreCounterProps) => {
+  const vote = useRef<"up" | "down" | null>(null);
 
   const handleUpvote = () => {
     vote.current = vote.current === "down" ? null : "up";
