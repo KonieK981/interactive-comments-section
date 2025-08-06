@@ -84,7 +84,7 @@ export function CommentsProvider({ children }) {
 
       return comment;
     });
-    console.log(updatedComments);
+
     setComments(updatedComments);
   };
 

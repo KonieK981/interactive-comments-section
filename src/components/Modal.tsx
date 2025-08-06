@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       onClick={handleOverlayClick}
     >
-      <div className="bg-white p-6 rounded-md shadow-md relative mx-4">
+      <div className="max-w-[350px] bg-white p-6 rounded-md shadow-md relative mx-4">
         {children}
       </div>
     </div>

@@ -35,7 +35,7 @@ const Form = ({ commentData, id, action }) => {
       <div className="hidden md:block">{img}</div>
       <form
         onSubmit={type !== "edit" ? handleAddComments : handleEditComments}
-        className="w-full inline-flex flex-col md:flex-row gap-4"
+        className="w-full inline-flex flex-col md:flex-row gap-4 md:ml-4"
       >
         <textarea
           name="comment"
@@ -49,7 +49,7 @@ const Form = ({ commentData, id, action }) => {
         <footer className="mt-2 inline-flex justify-between md:block">
           <div className="md:hidden">{img}</div>
           <Button
-            text="SEND"
+            text={type === "comment" ? "SEND" : "Update"}
             alt="Send button"
             classProps="px-6 py-2 text-white bg-purple-600 rounded-md hover:bg-purple-200"
             spanProps="text-md"

@@ -100,7 +100,7 @@ const CommentCard = ({
         <div className="hidden md:block">
           <ScoreCounter score={score} handleClick={handleScoreAction} />
         </div>
-        <div>
+        <div className="w-full">
           <header className="flex justify-between">
             <div className="flex  items-center">
               <img src={userImg} alt="User avatar" className="w-10 h-10" />

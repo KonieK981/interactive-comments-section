@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 px-3 py-6">
+      <div className="flex flex-col gap-4 px-3 py-6 max-w-5xl mx-auto">
         {comments.map((comment) => (
           <React.Fragment key={comment.id}>
             <CommentCard
@@ -28,7 +28,7 @@ function App() {
             />
 
             {comment.replies.length > 0 && (
-              <div className="flex flex-col gap-3 border-l-2 border-grey-100 pl-3">
+              <div className="flex flex-col gap-3 border-l-2 border-grey-100 pl-3 md:pl-6 md:ml-6">
                 {comment.replies.map((reply) => (
                   <CommentCard
                     key={reply.id}
