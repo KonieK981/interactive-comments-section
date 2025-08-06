@@ -94,7 +94,7 @@ const CommentCard = ({
 
   return (
     <>
-      <article className="w-full flex flex-col md:flex-row gap-4 rounded-xl bg-white p-3">
+      <article className="w-full flex flex-col md:flex-row gap-4 rounded-xl bg-white p-3 md:p-6 shadow-md">
         <div className="hidden md:block">
           <ScoreCounter score={score} handleClick={handleScoreAction} />
         </div>
