@@ -120,12 +120,7 @@ const CommentCard = ({
       </article>
       {isReplying && (
         <div className="relative bottom-2">
-          <Form
-            type="reply"
-            userId={id}
-            action={setIsReplying}
-            userName={username}
-          />
+          <Form type="reply" userId={id} action={setIsReplying} />
         </div>
       )}
     </>

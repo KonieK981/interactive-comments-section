@@ -22,7 +22,7 @@ export function CommentsProvider({ children }) {
         if (reply.id === id) {
           return {
             ...reply,
-            score: reply.score + (action === "up" ? 1 : 1),
+            score: reply.score + (action === "up" ? 1 : -1),
           };
         }
         return reply;
@@ -33,7 +33,60 @@ export function CommentsProvider({ children }) {
     setComments(updateComments);
   };
 
-  const addComments = () => {};
+  const addComments = (type, content, userId) => {
+    const newComment = {
+      id: crypto.randomUUID(),
+      content: content,
+      createdAt: new Date().toISOString(),
+      score: 0,
+      user: {
+        image: {
+          png: currentUser.image.png,
+          webp: currentUser.image.webp,
+        },
+        username: currentUser.username,
+      },
+      replies: [],
+    };
+
+    if (type === "comment") {
+      setComments((prev) => [...prev, newComment]);
+      return;
+    }
+
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === userId) {
+        return {
+          ...comment,
+          replies: [
+            ...comment.replies,
+            {
+              ...newComment,
+              replyingTo: comment.user.username,
+            },
+          ],
+        };
+      }
+
+      const replyTarget = comment.replies.find((reply) => reply.id === userId);
+      if (replyTarget) {
+        return {
+          ...comment,
+          replies: [
+            ...comment.replies,
+            {
+              ...newComment,
+              replyingTo: replyTarget.user.username,
+            },
+          ],
+        };
+      }
+
+      return comment;
+    });
+
+    setComments(updatedComments);
+  };
 
   const editComments = (id, value) => {};
 
@@ -60,6 +113,7 @@ export function CommentsProvider({ children }) {
         isModalOpen,
         setIsModalOpen,
         handleScore,
+        addComments,
         removeComments,
         deleteModalData,
         setDeleteModalData,

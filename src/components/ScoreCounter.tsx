@@ -37,9 +37,11 @@ const ScoreCounter = ({ score, handleClick }) => {
       <button
         aria-label="Downvote"
         className={` p-3 ${
-          vote.current === "down" ? "cursor-not-allowed" : "cursor-pointer"
+          vote.current === "down" || score === 0
+            ? "cursor-not-allowed"
+            : "cursor-pointer"
         }`}
-        disabled={vote.current === "down"}
+        disabled={vote.current === "down" || score === 0}
         onClick={handleDownvote}
       >
         <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
