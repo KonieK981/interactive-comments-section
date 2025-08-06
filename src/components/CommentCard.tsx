@@ -3,6 +3,7 @@ import Button from "./buttons/Button";
 import Form from "./Form";
 import ScoreCounter from "./ScoreCounter";
 import { useComments } from "../contexts/CommentsContext";
+import { timeAgo } from "../utils";
 
 const CommentCard = ({
   id,
@@ -95,7 +96,9 @@ const CommentCard = ({
                   you
                 </span>
               )}
-              <time className="ml-4 text-lg text-grey-500">{createdAt}</time>
+              <time className="ml-4 text-lg text-grey-500">
+                {timeAgo(createdAt)}
+              </time>
             </div>
             <div className=" hidden md:block">{actions}</div>
           </header>
@@ -117,7 +120,12 @@ const CommentCard = ({
       </article>
       {isReplying && (
         <div className="relative bottom-2">
-          <Form />
+          <Form
+            type="reply"
+            userId={id}
+            action={setIsReplying}
+            userName={username}
+          />
         </div>
       )}
     </>
