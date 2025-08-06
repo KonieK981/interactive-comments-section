@@ -33,7 +33,7 @@ export function CommentsProvider({ children }) {
     setComments(updateComments);
   };
 
-  const addComments = (type, content, userId) => {
+  const addComments = (content, id) => {
     const newComment = {
       id: crypto.randomUUID(),
       content: content,
@@ -49,13 +49,13 @@ export function CommentsProvider({ children }) {
       replies: [],
     };
 
-    if (type === "comment") {
+    if (!id) {
       setComments((prev) => [...prev, newComment]);
       return;
     }
 
     const updatedComments = comments.map((comment) => {
-      if (comment.id === userId) {
+      if (comment.id === id) {
         return {
           ...comment,
           replies: [
@@ -68,7 +68,7 @@ export function CommentsProvider({ children }) {
         };
       }
 
-      const replyTarget = comment.replies.find((reply) => reply.id === userId);
+      const replyTarget = comment.replies.find((reply) => reply.id === id);
       if (replyTarget) {
         return {
           ...comment,
@@ -84,11 +84,36 @@ export function CommentsProvider({ children }) {
 
       return comment;
     });
-
+    console.log(updatedComments);
     setComments(updatedComments);
   };
 
-  const editComments = (id, value) => {};
+  const editComments = (id, value) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === id) {
+        return {
+          ...comment,
+          content: value,
+          createdAt: new Date().toISOString(),
+        };
+      }
+
+      const updatedReplies = comment.replies.map((reply) => {
+        if (reply.id === id) {
+          return {
+            ...reply,
+            content: value,
+            createdAt: new Date().toISOString(),
+          };
+        }
+        return reply;
+      });
+
+      return { ...comment, replies: updatedReplies };
+    });
+
+    setComments(updatedComments);
+  };
 
   const removeComments = () => {
     if (deleteModalData) {
@@ -114,6 +139,7 @@ export function CommentsProvider({ children }) {
         setIsModalOpen,
         handleScore,
         addComments,
+        editComments,
         removeComments,
         deleteModalData,
         setDeleteModalData,

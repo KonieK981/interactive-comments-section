@@ -7,7 +7,6 @@ import { useComments } from "./contexts/CommentsContext";
 function App() {
   const {
     comments,
-    currentUser,
     isModalOpen,
     setIsModalOpen,
     removeComments,
@@ -26,7 +25,6 @@ function App() {
               score={comment.score}
               username={comment.user.username}
               userImg={comment.user.image.webp}
-              owner={currentUser.username === comment.username}
             />
 
             {comment.replies.length > 0 && (
@@ -41,7 +39,6 @@ function App() {
                     username={reply.user.username}
                     userImg={reply.user.image.webp}
                     replyingTo={reply.replyingTo}
-                    owner={currentUser.username === reply.user.username}
                   />
                 ))}
               </div>

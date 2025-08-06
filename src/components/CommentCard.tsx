@@ -13,10 +13,13 @@ const CommentCard = ({
   username,
   userImg,
   replyingTo,
-  owner,
 }) => {
   const [isReplying, setIsReplying] = useState(false);
-  const { handleScore, setIsModalOpen, setDeleteModalData } = useComments();
+  const [commentData, setCommentData] = useState(null);
+  const { currentUser, handleScore, setIsModalOpen, setDeleteModalData } =
+    useComments();
+
+  const owner = currentUser.username === username;
 
   const handleScoreAction = (action) => {
     handleScore(id, action);
@@ -25,6 +28,19 @@ const CommentCard = ({
   const handleDelete = () => {
     setIsModalOpen(true);
     setDeleteModalData(id);
+  };
+
+  const handleEdit = () => {
+    setIsReplying(true);
+    setCommentData({
+      id,
+      content,
+      createdAt,
+      score,
+      username,
+      userImg,
+      replyingTo,
+    });
   };
 
   const actions = owner ? (
@@ -57,7 +73,7 @@ const CommentCard = ({
         text="Edit"
         alt="Edit button"
         classProps="edit-btn"
-        // handleClick={}
+        handleClick={handleEdit}
       />
     </div>
   ) : (
@@ -120,7 +136,7 @@ const CommentCard = ({
       </article>
       {isReplying && (
         <div className="relative bottom-2">
-          <Form type="reply" userId={id} action={setIsReplying} />
+          <Form commentData={commentData} id={id} action={setIsReplying} />
         </div>
       )}
     </>
