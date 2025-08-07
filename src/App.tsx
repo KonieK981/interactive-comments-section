@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 px-3 py-6 max-w-5xl mx-auto">
+      <div className="flex flex-col gap-4 px-3 py-6 max-w-5xl mx-auto sm:px-8">
         {comments?.map((comment: Comment) => (
           <React.Fragment key={comment.id}>
             <CommentCard

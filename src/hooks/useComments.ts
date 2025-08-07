@@ -110,12 +110,12 @@ export function useComments() {
   };
 
   const removeComments = () => {
-    const removeRecursive = (items: Comment[]): Comment[] =>
+    const removeRecursive = (items: Comment[] = []): Comment[] =>
       items
         .filter((item) => String(item.id) !== String(deleteModalData))
         .map((item) => ({
           ...item,
-          replies: removeRecursive(item.replies),
+          replies: removeRecursive(item.replies ?? []),
         }));
 
     setComments((prev: Comment[]) => removeRecursive(prev));
