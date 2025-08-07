@@ -8,7 +8,7 @@
   },
   "comments": [
     {
-      "id": 1,
+      "id": "b7a2d49e-4e9d-4b7e-a6ce-7f4a12f5c9c1",
       "content": "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
       "createdAt": "2024-08-05T14:04:52.276Z",
       "score": 12,
@@ -22,7 +22,7 @@
       "replies": []
     },
     {
-      "id": 2,
+      "id": "f63e7755-6b8c-4f0a-a9a1-5128b1cc623e",
       "content": "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
       "createdAt": "2025-03-05T14:04:52.276Z",
       "score": 5,
@@ -35,7 +35,7 @@
       },
       "replies": [
         {
-          "id": 3,
+          "id": "3cf62192-9fae-4e7a-ae7b-1d95b68d3976",
           "content": "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
           "createdAt": "2025-05-05T14:04:52.276Z",
           "score": 4,
@@ -49,7 +49,7 @@
           }
         },
         {
-          "id": 4,
+          "id": "d320f5e1-dc28-4c88-8820-5c6603509624",
           "content": "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
           "createdAt": "2025-08-02T14:04:52.276Z",
           "score": 2,

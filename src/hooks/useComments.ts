@@ -29,7 +29,7 @@ export function useComments() {
     );
   }, [currentUser, comments]);
 
-  const handleScore = (id: string | number, action: string) => {
+  const handleScore = (id: string, action: string) => {
     setComments((prev: Comment[]) =>
       prev.map((comment: Comment) => {
         if (comment.id === id) {
@@ -48,7 +48,7 @@ export function useComments() {
     );
   };
 
-  const addComments = (content: string, id?: string) => {
+  const addComments = (content?: string, id?: string) => {
     const newComment = {
       id: crypto.randomUUID(),
       content,
@@ -89,7 +89,7 @@ export function useComments() {
     });
   };
 
-  const editComments = (id: string | number, value: string) => {
+  const editComments = (id: string, value: string) => {
     setComments((prev: Comment[]) =>
       prev.map((comment: Comment) => {
         if (comment.id === id) {

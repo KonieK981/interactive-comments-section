@@ -27,9 +27,11 @@ const Form = ({ commentData, id, action }: FormProps) => {
 
   const handleEditComments = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    editComments(id, formData.commentText);
-    (e.target as HTMLFormElement).reset();
-    if (action) action(false);
+    if (id) {
+      editComments(id, formData.commentText);
+      (e.target as HTMLFormElement).reset();
+      if (action) action(false);
+    }
   };
 
   return (

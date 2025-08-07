@@ -28,9 +28,9 @@ export type CommentsContextType = {
   };
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleScore: (id: string | number | undefined, action: "up" | "down") => void;
-  addComments: (content: string | number | undefined, id?: string) => void;
-  editComments: (id: string | number | undefined, value: string) => void;
+  handleScore: (id: string, action: "up" | "down") => void;
+  addComments: (content?: string, id?: string) => void;
+  editComments: (id: string, value: string) => void;
   removeComments: () => void;
   deleteModalData: string | null;
   setDeleteModalData: React.Dispatch<React.SetStateAction<string | null>>;
@@ -49,7 +49,7 @@ export interface ScoreCounterProps {
 
 export interface FormProps {
   commentData?: { content: string };
-  id?: string | number;
+  id?: string;
   action?: (show: boolean) => void;
 }
 
@@ -64,7 +64,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export interface CommentCardProps {
-  id: string | number;
+  id: string;
   content: string;
   createdAt: string;
   score: number;
