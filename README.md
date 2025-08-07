@@ -35,8 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/KonieK981/interactive-comments-section)
-- Live Site URL: [Add live site URL here](https://interactive-comments-section-two-nu.vercel.app/)
+- Solution URL: [https://github.com/KonieK981/interactive-comments-section](https://github.com/KonieK981/interactive-comments-section)
+- Live Site URL: [https://interactive-comments-section-two-nu.vercel.app/](https://interactive-comments-section-two-nu.vercel.app/)
 
 ## My process
 
